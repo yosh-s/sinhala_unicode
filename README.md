@@ -59,7 +59,7 @@ A modern, feature-rich web application for converting text to Sinhala Unicode wi
 1. **Clone the repository**
    ```bash
    git clone https://github.com/yosh-s/sinhala_unicode.git
-   cd sinhala-unicode-converter
+   cd sinhala_unicode
    ```
 
 2. **Open in browser**
