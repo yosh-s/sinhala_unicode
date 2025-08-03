@@ -43,7 +43,7 @@ A modern, feature-rich web application for converting text to Sinhala Unicode wi
 
 ## 🚀 Demo
 
-[**🔗 Live Demo**](https://your-username.github.io/sinhala-unicode-converter) *(Replace with your actual GitHub Pages URL)*
+[**🔗 Live Demo**](https://yosh-s.github.io/sinhala_unicode/)
 
 ## 📸 Screenshots
 
@@ -58,7 +58,7 @@ A modern, feature-rich web application for converting text to Sinhala Unicode wi
 ### Quick Start
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/sinhala-unicode-converter.git
+   git clone https://github.com/yosh-s/sinhala_unicode.git
    cd sinhala-unicode-converter
    ```
 
@@ -95,9 +95,9 @@ sinhala-unicode-converter/
 ├── ⚡ script.js           # Advanced JavaScript functionality
 ├── 📖 README.md           # Project documentation
 ├── 📷 screenshots/        # Application screenshots
-│   ├── desktop.png
-│   └── mobile.png
-└── 🔧 sw.js              # Service Worker (optional)
+    ├── desktop.png
+    └── mobile.png
+
 ```
 
 ## 🎯 How to Use
@@ -203,7 +203,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🐛 Bug Reports & Feature Requests
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/your-username/sinhala-unicode-converter/issues) with:
+Found a bug or have a feature request? Please [open an issue](https://github.com/yosh-s/sinhala_unicode/issues) with:
 
 **For Bugs:**
 - Browser and version
