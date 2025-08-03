@@ -1,33 +1,49 @@
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Easy Sinhala Unicode - API</title>
-		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript">
-			function trans(txtAre)
-			{
-				var remotePath = "https://easysinhalaunicode.com/Api/convert"
-				$.ajax({				
-					url: remotePath,
-					method: "POST",
-					data:{data:$(txtAre).val()}						 	  
-				})
-				.done(function( msg ) {						
-					$("#res").val(msg);				
-				}).error(function(err){
-					$("#res").val(err.statusText);
-				});				
-			}
-			$(document).ready(function(){
-				trans($("#sou"));
-			});
-		</script>
-	</head>
-    
-	
-	<body style="text-align:center" >
-		<div style="font-size:25px;margin:20px" ><b>Welcome to Easy Sinhala Unicode - Developer API</b></div>
-		<textarea cols="50" rows="20" id="sou" onkeyup="trans(this)" >si\nhala</textarea>
-		<textarea cols="50" rows="20" id="res" ></textarea>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Sinhala Unicode - API</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-4xl bg-gray-800 rounded-lg shadow-xl p-6">
+        <h1 class="text-3xl font-bold text-center text-indigo-400 mb-6">Easy Sinhala Unicode Converter</h1>
+        <p class="text-center text-gray-300 mb-8">Convert your text to Sinhala Unicode effortlessly using our API</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="sou" class="block text-sm font-medium text-gray-300 mb-2">Input Text</label>
+                <textarea
+                    id="sou"
+                    cols="50"
+                    rows="10"
+                    class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="Enter text to convert (e.g., si\nhala)"
+                >si
+hala</textarea>
+            </div>
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <label for="res" class="block text-sm font-medium text-gray-300">Converted Unicode</label>
+                    <button
+                        id="copyButton"
+                        onclick="copyToClipboard()"
+                        class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >Copy</button>
+                </div>
+                <textarea
+                    id="res"
+                    cols="50"
+                    rows="10"
+                    class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100"
+                    readonly
+                ></textarea>
+            </div>
+        </div>
+        <div class="mt-6 text-center">
+            <p class="text-gray-400 text-sm">Powered by Easy Sinhala Unicode API</p>
+        </div>
+    </div>
+</body>
 </html>
