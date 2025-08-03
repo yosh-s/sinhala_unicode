@@ -1,38 +1,40 @@
-function trans(txtAre) {
-    var remotePath = "https://easysinhalaunicode.com/Api/convert";
-    $.ajax({
-        url: remotePath,
-        method: "POST",
-        data: { data: $(txtAre).val() }
-    })
-    .done(function(msg) {
-        $("#res").val(msg);
-    })
-    .fail(function(err) {
-        $("#res").val("Error: " + err.statusText);
-    });
-}
 
-function copyToClipboard() {
-    var text = $("#res").val();
-    navigator.clipboard.writeText(text).then(function() {
-        $("#copyButton").text("Copied!");
-        setTimeout(function() {
-            $("#copyButton").text("Copy");
-        }, 2000);
-    }, function(err) {
-        console.error('Could not copy text: ', err);
-        $("#copyButton").text("Error");
-        setTimeout(function() {
-            $("#copyButton").text("Copy");
-        }, 2000);
-    });
-}
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
 
-$(document).ready(function() {
-    $("#sou").on("input", function() {
-        trans(this);
-    });
-    // Initial conversion
-    trans($("#sou"));
-});
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        

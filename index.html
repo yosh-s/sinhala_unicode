@@ -3,47 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Sinhala Unicode - API</title>
+    <title>Easy Sinhala Unicode - Enhanced Converter</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-4xl bg-gray-800 rounded-lg shadow-xl p-6">
-        <h1 class="text-3xl font-bold text-center text-indigo-400 mb-6">Easy Sinhala Unicode Converter</h1>
-        <p class="text-center text-gray-300 mb-8">Convert your text to Sinhala Unicode effortlessly using our API</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label for="sou" class="block text-sm font-medium text-gray-300 mb-2">Input Text</label>
-                <textarea
-                    id="sou"
-                    cols="50"
-                    rows="10"
-                    class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    placeholder="Enter text to convert (e.g., si\nhala)"
-                >si
-hala</textarea>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-language"></i>
+                <h1>Sinhala Unicode Converter</h1>
             </div>
-            <div>
-                <div class="flex justify-between items-center mb-2">
-                    <label for="res" class="block text-sm font-medium text-gray-300">Converted Unicode</label>
-                    <button
-                        id="copyButton"
-                        onclick="copyToClipboard()"
-                        class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    >Copy</button>
+            <p class="subtitle">Convert your text to beautiful Sinhala Unicode instantly</p>
+        </header>
+
+        <main class="converter-container">
+            <div class="converter-grid">
+                <!-- Input Section -->
+                <div class="input-section">
+                    <div class="section-header">
+                        <label for="input-text" class="section-title">
+                            <i class="fas fa-edit"></i>
+                            Input Text
+                        </label>
+                        <div class="char-count">
+                            <span id="char-count">0</span> characters
+                        </div>
+                    </div>
+                    
+                    <div class="textarea-container">
+                        <textarea
+                            id="input-text"
+                            placeholder="Type your text here... (e.g., si\nhala)"
+                            spellcheck="false"
+                        >si\nhala</textarea>
+                        
+                        <div class="textarea-actions">
+                            <button id="clear-input" class="action-btn" title="Clear input">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button id="paste-btn" class="action-btn" title="Paste from clipboard">
+                                <i class="fas fa-paste"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <textarea
-                    id="res"
-                    cols="50"
-                    rows="10"
-                    class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-gray-100"
-                    readonly
-                ></textarea>
+
+                <!-- Output Section -->
+                <div class="output-section">
+                    <div class="section-header">
+                        <label for="output-text" class="section-title">
+                            <i class="fas fa-language"></i>
+                            Sinhala Unicode
+                        </label>
+                        <div class="conversion-status">
+                            <span id="status-indicator" class="status-ready">Ready</span>
+                        </div>
+                    </div>
+                    
+                    <div class="textarea-container">
+                        <textarea
+                            id="output-text"
+                            placeholder="Converted text will appear here..."
+                            readonly
+                        ></textarea>
+                        
+                        <div class="textarea-actions">
+                            <button id="copy-output" class="action-btn" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button id="select-all" class="action-btn" title="Select all">
+                                <i class="fas fa-check-square"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="loading-overlay" id="loading-overlay">
+                            <div class="spinner"></div>
+                            <span>Converting...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <button id="convert-btn" class="convert-btn">
+                    <i class="fas fa-exchange-alt"></i>
+                    Convert Now
+                </button>
+                
+                <div class="options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="auto-convert" checked>
+                        <span class="checkmark"></span>
+                        Auto-convert as you type
+                    </label>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notification -->
+        <div id="notification" class="notification">
+            <div class="notification-content">
+                <span class="notification-text"></span>
+                <button class="notification-close">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
-        <div class="mt-6 text-center">
-            <p class="text-gray-400 text-sm">Powered by Easy Sinhala Unicode API</p>
-        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>
+                    <i class="fas fa-heart text-red-400"></i>
+                    Powered by Easy Sinhala Unicode API
+                </p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Help</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+            </div>
+        </footer>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
