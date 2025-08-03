@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Easy Sinhala Unicode - API</title>
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			function trans(txtAre)
+			{
+				var remotePath = "https://easysinhalaunicode.com/Api/convert"
+				$.ajax({				
+					url: remotePath,
+					method: "POST",
+					data:{data:$(txtAre).val()}						 	  
+				})
+				.done(function( msg ) {						
+					$("#res").val(msg);				
+				}).error(function(err){
+					$("#res").val(err.statusText);
+				});				
+			}
+			$(document).ready(function(){
+				trans($("#sou"));
+			});
+		</script>
+	</head>
+	
+	<body style="text-align:center" >
+		<div style="font-size:25px;margin:20px" ><b>Welcome to Easy Sinhala Unicode - Developer API</b></div>
+		<textarea cols="50" rows="20" id="sou" onkeyup="trans(this)" >si\nhala</textarea>
+		<textarea cols="50" rows="20" id="res" ></textarea>
+	</body>
+</html>
